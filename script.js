@@ -35,7 +35,7 @@ class BoxShadowGenerator {
             this.inset = inset;
         };
 
-        hexToRgb(hex) {
+        hexToRgba(hex) {
 
             hex = hex.replace(
                     /^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => '#' + r + r + g + g + b + b
@@ -47,9 +47,9 @@ class BoxShadowGenerator {
 
         initialize() {
 
-            let rgbColor = [];
+            let rgbaColor = [];
             let opacityValue = (this.opacity.value)/100;
-            rgbColor = boxShadow.hexToRgb(color.value);
+            rgbaColor = boxShadow.hexToRgba(color.value);
 
             this.horizontalRef.value = this.horizontal.value;
             this.verticalRef.value = this.vertical.value;
@@ -57,21 +57,21 @@ class BoxShadowGenerator {
             this.spreadRef.value = this.spread.value;
             this.opacityRef.value = opacityValue;
             
-            this.applyRule(rgbColor);
+            this.applyRule(rgbaColor);
             this.showRule();
             
         };
 
-        applyRule(rgbColor) {
+        applyRule(rgbaColor) {
 
-            rgbColor = boxShadow.hexToRgb(color.value);
+            rgbaColor = boxShadow.hexToRgba(color.value);
 
             this.previewBox.style.boxShadow = `
                 ${this.horizontalRef.value}px
                 ${this.verticalRef.value}px
                 ${this.blurRef.value}px
                 ${this.spreadRef.value}px
-                rgb(${rgbColor[0]}, ${rgbColor[1]}, ${rgbColor[2]}, ${opacityRef.value})
+                rgba(${rgbaColor[0]}, ${rgbaColor[1]}, ${rgbaColor[2]}, ${opacityRef.value})
                 ${this.inset.checked === true ? 'inset' : ''}
             `;
             
